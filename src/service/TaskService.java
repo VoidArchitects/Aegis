@@ -16,14 +16,15 @@ public class TaskService{
     public void removeTask(Task task){
         tasks.remove(task);
     }
-    public List<Task> getAllTasks(){
-        return List.copyOf(tasks);
-    }
     public void markTaskAsCompleted(Task task){
         task.markComplete();
     }
     public void markTaskAsNotCompleted(Task task){
         task.markIncomplete();
+    }
+    // ================================QUERIES=================================
+    public List<Task> getAllTasks(){
+        return List.copyOf(tasks);
     }
     public int getTaskCount(){
         return tasks.size();
@@ -44,7 +45,7 @@ public class TaskService{
     public List<Task> findTasksByCategory(Category category){
         List<Task> result = new ArrayList<>();
         for(Task task : tasks){
-            if(task.getCategory().equals(category)){
+            if(task.getCategory() == (category)){
                 result.add(task);
             }
         }
@@ -53,7 +54,7 @@ public class TaskService{
     public List<Task> findTasksByPriority(Priority priority){
         List<Task> result = new ArrayList<>();
         for(Task task : tasks){
-            if(task.getPriority().equals(priority)){
+            if(task.getPriority() == (priority)){
                 result.add(task);
             }
         }
