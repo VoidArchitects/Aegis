@@ -60,13 +60,15 @@ public class User{
     @Override
     public String toString(){
         return """
-            ========== USER ==========
-            Name      : %s
-            Age       : %d
-            College   : %s
-            Goal      : %s
-            Joined On : %s
-            ==========================
+                    =========================
+                              USER
+                    =========================
+                    Name      : %s
+                    Age       : %d
+                    College   : %s
+                    Goal      : %s
+                    Joined On : %s
+                    ==========================
             """.formatted(name, age, college, goal, joinDate);
     }
 }
