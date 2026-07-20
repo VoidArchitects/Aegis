@@ -1,4 +1,5 @@
 package ui;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import model.User;
 import service.UserService;
@@ -9,7 +10,7 @@ public class ConsoleUI{
     public ConsoleUI(UserService userService){
         this.sc = new Scanner(System.in);
         this.userService = userService;
-        this.currentUser  = userService.createDefaultUser();
+        this.currentUser  = this.userService.createDefaultUser();
     }
     public void displayMenu(){
         System.out.println( """
@@ -30,7 +31,13 @@ public class ConsoleUI{
         """ );
     }
     public int getChoice(){
-        return sc.nextInt();
+        try{
+            return sc.nextInt();
+        } catch (InputMismatchException e){
+            sc.nextLine();
+            System.out.println("Invalid input. Please enter a number.");
+            return -1;
+        }
     }
     // ===============================START METHOD===============================
     public void start(){
