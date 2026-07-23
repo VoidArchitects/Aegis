@@ -1,178 +1,203 @@
 # Project Aegis
 
-> A long-term Java software engineering project focused on building a personal productivity system while learning clean architecture and real-world development practices.
+> Your personal productivity and skill tracking system, built from scratch in Java.
 
-## Overview
+Project Aegis is a long-term software engineering project focused on building a personal productivity operating system while learning clean architecture, object-oriented design, data persistence, and scalable application development.
 
-Project Aegis is a local Java application that serves as a personal productivity and skill tracker.
-
-Rather than building a typical CRUD application, the goal is to design software that is modular, maintainable, and expandable over time.
-
-The project tracks multiple aspects of personal growth, including:
-
-* 📚 Tasks & Assignments
-* 💻 DSA Progress
-* 🏋️ Gym Progress
-* 🇯🇵 Japanese Learning
-* 📊 Personal Statistics
-
-The project is being developed incrementally, following software engineering principles instead of tutorial-driven development.
-
----
-
-# Tech Stack
-
-* Java
-* Maven
-* Git & GitHub
-
-### Planned
-
-* File Serialization
-* SQLite
-* JavaFX
-* Spring Boot
-
----
-
-# Current Project Structure
-
-```text
-ProjectAegis
-│
-├── src
-│   ├── main
-│   │   └── java
-│   │       ├── app
-│   │       ├── model
-│   │       ├── service
-│   │       ├── ui
-│   │       ├── enums
-│   │       ├── utils
-│   │       ├── repository
-│   │       ├── storage
-│   │       └── exception
-│
-├── pom.xml
-└── README.md
-```
-
----
-
-# Features Completed
-
-## User Module
-
-* [x] User model
-* [x] User service
-* [x] Display user profile
-
----
-
-## Task Module
-
-* [x] Task model
-* [x] Category enum
-* [x] Priority enum
-* [x] Task service
-* [x] Add tasks
-* [x] Remove tasks
-* [x] Mark complete / incomplete
-* [x] Search by title
-* [x] Search by category
-* [x] Search by priority
-* [x] Sort by title
-* [x] Sort by priority
-* [x] Sort by deadline
-
----
-
-## Console UI
-
-* [x] Interactive menu
-* [x] Menu loop
-* [x] Input validation
-* [x] Exit handling
-
----
-
-# Planned Features
-
-## Dashboard
-
-* Daily overview
-* Progress summary
-* Statistics
-* Current streaks
-
-## DSA Tracker
-
-* Problem tracking
-* Topic statistics
-* Revision counter
-* Difficulty analysis
-
-## Gym Tracker
-
-* Workout history
-* Personal records
-* Training volume
-* Exercise statistics
-
-## Japanese Tracker
-
-* Kanji progress
-* Grammar lessons
-* Vocabulary count
-* Study streak
-
----
-
-# Development Philosophy
-
-Project Aegis is intentionally developed in small iterations.
-
-Every feature is designed with:
-
-* Clean architecture
-* Separation of concerns
-* Encapsulation
-* Readable code
-* Small, focused classes
-* Incremental improvements
-
-The objective is not to finish quickly, but to build software that can continue evolving over time.
+Rather than following tutorials, the project is built feature-by-feature to simulate real software development.
 
 ---
 
 # Current Version
 
-**v0.1.0 (In Development)**
+**v0.2.0**
 
-Completed:
+---
 
-* Project architecture
-* User module foundation
-* Task module foundation
-* Interactive console UI
-* Input validation
+# Features
+
+## ✅ User Profile
+
+- Create default user
+- Display profile
+- Clean User model
+- Encapsulation
+- Validation
+- `toString()` implementation
+
+---
+
+## ✅ Task Manager (CRUD)
+
+### Create
+
+- Add task
+
+### Read
+
+- View all tasks
+
+### Update
+
+- Edit title
+- Edit description
+- Edit category
+- Edit priority
+- Edit deadline
+- Edit completion status
+
+### Delete
+
+- Remove task
+
+### Other
+
+- Mark complete
+- Mark incomplete
+- Index validation
+- Category & Priority enums
+- Helper input methods
+- Search methods (service)
+- Sorting methods (service)
+
+---
+
+## 🚧 DSA Tracker
+
+Planned
+
+---
+
+## 🚧 Gym Tracker
+
+Planned
+
+---
+
+## 🚧 Japanese Tracker
+
+Planned
+
+---
+
+## 🚧 Dashboard
+
+Planned
+
+---
+
+# Architecture
+
+```
+src/
+
+├── app/
+│   └── Main.java
+│
+├── model/
+│   ├── User.java
+│   └── Task.java
+│
+├── service/
+│   ├── UserService.java
+│   └── TaskService.java
+│
+├── enums/
+│   ├── Category.java
+│   └── Priority.java
+│
+└── ui/
+    └── ConsoleUI.java
+```
+
+---
+
+# Technologies
+
+- Java
+- Maven
+
+Future
+
+- File Serialization
+- SQLite
+- JavaFX
+- Spring Boot REST API
 
 ---
 
 # Roadmap
 
-* [ ] Functional Task Manager
-* [ ] File persistence
-* [ ] Dashboard
-* [ ] DSA Tracker
-* [ ] Gym Tracker
-* [ ] Japanese Tracker
-* [ ] SQLite integration
-* [ ] JavaFX desktop application
-* [ ] Spring Boot REST API
+## Phase 1 ✅
+
+- Project setup
+- Models
+- Services
+- Console UI
+- User Profile
+- Task Manager CRUD
 
 ---
 
-# License
+## Phase 2 (Next)
 
-This project is developed as a personal learning project and portfolio application.
+- Save tasks to file
+- Load tasks automatically
+- Persistent user profile
+
+---
+
+## Phase 3
+
+- DSA Tracker
+- Gym Tracker
+- Japanese Tracker
+
+---
+
+## Phase 4
+
+- Dashboard
+- Statistics
+- Search improvements
+- Sorting improvements
+
+---
+
+## Phase 5
+
+- SQLite
+- JavaFX
+- Better architecture
+- Reports
+- Analytics
+
+---
+
+# Learning Goals
+
+- Object-Oriented Programming
+- Clean Code
+- Layered Architecture
+- Collections Framework
+- Exception Handling
+- File Handling
+- Serialization
+- Design Thinking
+- Git Workflow
+
+---
+
+# Current Progress
+
+- ✅ User Module
+- ✅ Task Module
+- ⏳ Persistent Storage
+- ⏳ Remaining Trackers
+- ⏳ Dashboard
+
+---
+
+# Project Status
+
+Actively under development.

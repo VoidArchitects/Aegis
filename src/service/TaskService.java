@@ -5,23 +5,33 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import model.Task;
+import storage.FileManager;
 public class TaskService{
     private final List<Task> tasks;
+    private final FileManager fileManager;
     public TaskService(){
-        tasks = new ArrayList<>();
+        fileManager = new FileManager();
+        tasks = new ArrayList<>(fileManager.loadTasks());
+    }
+    private void save() {
+        fileManager.saveTasks(tasks);
     }
     // ================================TASK MANAGEMENT METHODS=================================
     public void addTask(Task task){
         tasks.add(task);
+        save();
     }
     public void removeTask(int index){
         tasks.remove(index - 1);
+        save();
     }
     public void markTaskAsCompleted(int index){
         tasks.get(index - 1).markComplete();
+        save();
     }
     public void markTaskAsNotCompleted(int index){
         tasks.get(index - 1).markIncomplete();
+        save();
     }
     // ================================QUERIES=================================
     public List<Task> getAllTasks(){
@@ -81,21 +91,26 @@ public class TaskService{
     public void editTitle(int index, String newTitle){
         Task task = tasks.get(index - 1);
         task.setTitle(newTitle);
+        save();
     }
     public void editDescription(int index, String newDescription){
         Task task = tasks.get(index - 1);
         task.setDescription(newDescription);
+        save();
     }
     public void editCategory(int index, Category newCategory){
         Task task = tasks.get(index - 1);
         task.setCategory(newCategory);
+        save();
     }
     public void editPriority(int index, Priority newPriority){
         Task task = tasks.get(index - 1);
         task.setPriority(newPriority);
+        save();
     }
     public void editDeadline(int index, LocalDate newDeadline){
         Task task = tasks.get(index - 1);
         task.setDeadline(newDeadline);
+        save();
     }
 }

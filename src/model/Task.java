@@ -2,9 +2,10 @@ package model;
 
 import enums.Category;
 import enums.Priority;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Task{
+public class Task implements Serializable{
     private String title;
     private String description;
     private Category category;

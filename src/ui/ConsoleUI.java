@@ -173,15 +173,18 @@ public class ConsoleUI{
         if(isValidTaskIndex(index)){
             boolean running = true;
             while(running){
-                System.out.println("What would you like to edit?");
                 System.out.println("""
-                        1. Title       
-                        2. Description  
-                        3. Category     
-                        4. Priority     
-                        5. Deadline    
-                        6. Completed status    
-                        0. back
+                            ====================================
+                                What would you like to edit?
+                            ====================================
+                                    1. Title       
+                                    2. Description  
+                                    3. Category     
+                                    4. Priority     
+                                    5. Deadline    
+                                    6. Completed status    
+                                    0. back
+                            ====================================
                         """);
                 System.out.println("Enter your Choice");
                 int choice = readInt();
