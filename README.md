@@ -1,16 +1,16 @@
 # Project Aegis
 
-> Your personal productivity and skill tracking system, built from scratch in Java.
+> A personal productivity and skill tracking system built from scratch in Java.
 
-Project Aegis is a long-term software engineering project focused on building a personal productivity operating system while learning clean architecture, object-oriented design, data persistence, and scalable application development.
+Project Aegis is a long-term software engineering project focused on learning software engineering by building a real application from the ground up.
 
-Rather than following tutorials, the project is built feature-by-feature to simulate real software development.
+Instead of following tutorials, every feature is designed, implemented, tested, and improved manually.
 
 ---
 
 # Current Version
 
-**v0.2.0**
+**v0.3.0**
 
 ---
 
@@ -18,20 +18,19 @@ Rather than following tutorials, the project is built feature-by-feature to simu
 
 ## ✅ User Profile
 
-- Create default user
+- Default user creation
 - Display profile
-- Clean User model
 - Encapsulation
 - Validation
-- `toString()` implementation
+- Custom `toString()`
 
 ---
 
-## ✅ Task Manager (CRUD)
+## ✅ Task Manager
 
 ### Create
 
-- Add task
+- Add tasks
 
 ### Read
 
@@ -48,17 +47,28 @@ Rather than following tutorials, the project is built feature-by-feature to simu
 
 ### Delete
 
-- Remove task
+- Remove tasks
 
-### Other
+### Extra Features
 
-- Mark complete
-- Mark incomplete
+- Mark complete/incomplete
+- Input validation
 - Index validation
-- Category & Priority enums
-- Helper input methods
-- Search methods (service)
-- Sorting methods (service)
+- Search by title
+- Search by category
+- Search by priority
+- Sort by title
+- Sort by priority
+- Sort by deadline
+
+---
+
+## ✅ Persistent Storage
+
+- Save tasks automatically
+- Load tasks on startup
+- Java Object Serialization
+- Binary storage using `tasks.dat`
 
 ---
 
@@ -88,7 +98,7 @@ Planned
 
 # Architecture
 
-```
+```text
 src/
 
 ├── app/
@@ -102,6 +112,9 @@ src/
 │   ├── UserService.java
 │   └── TaskService.java
 │
+├── storage/
+│   └── FileManager.java
+│
 ├── enums/
 │   ├── Category.java
 │   └── Priority.java
@@ -114,12 +127,14 @@ src/
 
 # Technologies
 
+Current
+
 - Java
-- Maven
+- Java Serialization
+- Object-Oriented Programming
 
-Future
+Planned
 
-- File Serialization
 - SQLite
 - JavaFX
 - Spring Boot REST API
@@ -128,26 +143,27 @@ Future
 
 # Roadmap
 
-## Phase 1 ✅
+## ✅ Phase 1
 
 - Project setup
 - Models
 - Services
 - Console UI
 - User Profile
-- Task Manager CRUD
+- Task Manager
 
 ---
 
-## Phase 2 (Next)
+## ✅ Phase 2
 
-- Save tasks to file
-- Load tasks automatically
-- Persistent user profile
+- File handling
+- Automatic saving
+- Automatic loading
+- Persistent task storage
 
 ---
 
-## Phase 3
+## 🚧 Phase 3
 
 - DSA Tracker
 - Gym Tracker
@@ -155,49 +171,54 @@ Future
 
 ---
 
-## Phase 4
+## 🚧 Phase 4
 
 - Dashboard
 - Statistics
-- Search improvements
-- Sorting improvements
+- Better search
+- Better sorting
+- User profile persistence
 
 ---
 
-## Phase 5
+## 🚧 Phase 5
 
 - SQLite
-- JavaFX
-- Better architecture
-- Reports
+- JavaFX GUI
 - Analytics
+- Reports
+- Improved architecture
 
 ---
 
 # Learning Goals
 
 - Object-Oriented Programming
-- Clean Code
+- SOLID Principles
 - Layered Architecture
 - Collections Framework
 - Exception Handling
 - File Handling
-- Serialization
-- Design Thinking
-- Git Workflow
+- Object Serialization
+- Clean Code
+- Git & GitHub Workflow
 
 ---
 
 # Current Progress
 
 - ✅ User Module
-- ✅ Task Module
-- ⏳ Persistent Storage
-- ⏳ Remaining Trackers
+- ✅ Task Manager
+- ✅ Persistent Storage
+- ⏳ DSA Tracker
+- ⏳ Gym Tracker
+- ⏳ Japanese Tracker
 - ⏳ Dashboard
 
 ---
 
 # Project Status
 
-Actively under development.
+🟢 Active Development
+
+Project Aegis is being developed feature-by-feature as a software engineering learning project.

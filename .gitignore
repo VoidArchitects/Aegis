@@ -1,0 +1,26 @@
+# Compiled Java classes
+*.class
+
+# VS Code
+.vscode/
+
+# Build folders
+out/
+target/
+build/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Serialized application data
+*.dat
+
+# Temporary files
+*.tmp
+
+# Powershell helpers script
+run.ps1

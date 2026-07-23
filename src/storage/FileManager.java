@@ -1,5 +1,6 @@
 package storage;
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -10,27 +11,34 @@ import java.util.List;
 import model.Task;
 
 public class FileManager {
+    private static final String TASK_FILE = "src/data/tasks.dat";
 
     public void saveTasks(List<Task> tasks){
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("src/data/tasks.dat"));
-            out.writeObject(tasks);
-            out.close();
-            
+           try (ObjectOutputStream out =
+            new ObjectOutputStream(new FileOutputStream(TASK_FILE))) {
+                out.writeObject(tasks);
+            }      
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error loading tasks: " + e.getMessage());
         }
     }
+    @SuppressWarnings("unchecked")
     public List<Task> loadTasks(){
+        File file = new File(TASK_FILE);
+
+        if (!file.exists() || file.length() == 0) {
+            return new ArrayList<>();
+        }
         try {
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream("src/data/tasks.dat"));
-            List<Task> tasks = (List<Task>) in.readObject();
-            in.close();
-            return tasks;
+            try (ObjectInputStream in =
+            new ObjectInputStream(new FileInputStream(TASK_FILE))) {
+                return (List<Task>) in.readObject();
+            }
         } catch (EOFException e) {
             return new ArrayList<>();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Error loading tasks: " + e.getMessage());
         }
         return new ArrayList<>();
     }

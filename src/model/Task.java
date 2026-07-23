@@ -12,6 +12,7 @@ public class Task implements Serializable{
     private Priority priority;
     private LocalDate deadline;
     private boolean completed;
+    private static final long serialVersionUID = 1L;
 
     public Task(String title, String description, Category category, Priority priority, LocalDate deadline) {
         this.title = title;
