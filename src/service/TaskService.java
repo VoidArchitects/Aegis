@@ -10,8 +10,8 @@ public class TaskService{
     private final List<Task> tasks;
     private final FileManager fileManager;
     public TaskService(){
-        fileManager = new FileManager();
-        tasks = new ArrayList<>(fileManager.loadTasks());
+        this.fileManager = new FileManager();
+        this.tasks = new ArrayList<>(fileManager.loadTasks());
     }
     private void save() {
         fileManager.saveTasks(tasks);
