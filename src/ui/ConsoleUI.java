@@ -1,23 +1,31 @@
 package ui;
 import enums.Category;
+import enums.Difficulty;
 import enums.Priority;
+import enums.Topic.Topics;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import model.Problem;
 import model.Task;
 import model.User;
+import service.DSAService;
 import service.TaskService;
 import service.UserService;
 public class ConsoleUI{
     private final Scanner sc;
+    private final User currentUser;
     private final UserService userService;
     private final TaskService taskService;
-    private final User currentUser;
+    private final DSAService dsaService;
     public ConsoleUI(UserService userService,
-                 TaskService taskService){
+                 TaskService taskService,
+                DSAService dsaService){
         this.sc = new Scanner(System.in);
         this.userService = userService;
         this.taskService = taskService;
+        this.dsaService = dsaService;
         this.currentUser  = this.userService.createDefaultUser();
     }
     public void displayMenu(){
@@ -77,7 +85,23 @@ public class ConsoleUI{
         }
     }
     public void displayDSATracker(){
-        System.out.println("DSA Tracker coming soon...");
+        boolean running = true;
+        while(running){
+            displayDSAMenu();
+            int choice = readInt();
+            switch(choice) {
+                case 1 -> addProblem();
+                case 2 -> removeProblem();
+                case 3 -> editProblem();
+                case 4 -> viewAllProblems();
+                case 5 -> markFavorite();
+                case 6 -> markRevision();
+                case 7 -> searchByDiff();
+                case 8 -> searchByTopic();
+                case 0 -> {displayDSAExitMsg(); running = false;}
+                default -> System.out.println("Invalid choice, please try again...");
+            }
+        }
     }
     public void displayGymTracker(){
         System.out.println("Gym Tracker coming soon...");
@@ -101,9 +125,9 @@ public class ConsoleUI{
                 4. Mark Task as Not Completed
                 5. View All Tasks
                 6. Edit Task
-                // 7. Search Tasks by Title
-                // 8. Search Tasks by Category
-                // 9. Search Tasks by Priority
+                7. Search Tasks by Title
+                8. Search Tasks by Category
+                9. Search Tasks by Priority
 
                 0. Back to Main Menu
                 ===========================================
@@ -312,8 +336,143 @@ public class ConsoleUI{
             }
         }
     }
+    // ========================================DSA Interface==================================
+    public void displayDSAMenu(){
+        System.out.println(
+            """
+                ===========================================
+                            DSA MANAGER
+                ===========================================
 
-    // ==============================================DSA Interface===========================================
+                1. Add Problem
+                2. Remove Problem
+                3. Edit Problem
+                4. View All Problems
+                5. Mark Favorite
+                6. Mark Revision
+                7. Search problems by Difficulty
+                8. Search problems by Topic
 
-    
+                0. Back to Main Menu
+                ===========================================
+
+                Enter Your Choice:                     
+            """
+        );
+    }
+    // =========================================DSA METHODS========================================
+    public void addProblem(){
+        System.out.println("Give Info about the problem you solved");
+
+        System.out.println("Name :");
+        String name = sc.nextLine();
+
+        System.out.println("Leetcode No. #");
+        int prbNo = readInt();
+
+        System.out.println("Difficulty :");
+        Difficulty difficulty = readDifficulty();
+
+        System.out.println("Topics : ");
+        List<Topics> topics = readTopics();
+
+        System.out.println("Date of Soln :");
+        LocalDate date = readDate();
+
+        System.out.println("Notes :");
+        String notes = sc.nextLine();
+
+        System.out.println("Total time given in minutes :");
+        int time = readInt();
+
+        System.out.println("Favorite?");
+        boolean favorite = readFavorite();
+
+        System.out.println("Needs Revision?");
+        boolean revision = readRevision();
+
+        Problem newproblem = new Problem(name, prbNo, difficulty, topics, date, notes, time, favorite, revision);
+        dsaService.addProblem(newproblem);
+        System.out.println("Question added succesfully!");
+    }
+    public void removeProblem(){
+
+    }
+    public void editProblem(){
+
+    }
+    public void viewAllProblems(){
+
+    }
+    public void markFavorite(){
+
+    }
+    public void markRevision(){
+
+    }
+    public void searchByDiff(){
+
+    }
+    public void searchByTopic(){
+
+    }
+    public void displayDSAExitMsg(){
+
+    }
+    // ==========================================DSA HELPERS====================================
+    private Difficulty readDifficulty() {
+        while (true) {
+            System.out.println("Choose Difficulty:");
+            for (int i = 0; i < Difficulty.values().length; i++) {
+                System.out.println((i + 1) + ". " + Difficulty.values()[i]);
+            }
+            int choice = readInt();
+            if (choice >= 1 && choice <= Difficulty.values().length) {
+                return Difficulty.values()[choice - 1];
+            }
+            System.out.println("Invalid Difficulty. Try again.");
+        }
+    }
+    private List<Topics> readTopics() {
+        List<Topics> result = new ArrayList<>();
+        while (true) {
+            System.out.println("Choose Topics:");
+            for(int i = 0 ; i < Topics.values().length ; i++){
+                System.out.println((i+1) + "." + Topics.values()[i]);
+            }
+            System.out.println("0. Completed topic selection");
+            int choice = readInt();
+            if (choice >= 1 && choice <= Topics.values().length) {
+                result.add(Topics.values()[choice-1]);
+            }
+            else if(choice > Topics.values().length){
+                System.out.println("Invalid choice, try again");
+            }
+            else{
+                return result;
+            }
+        }
+    }
+    private LocalDate readDate(){
+        while (true) {
+            try {
+                System.out.print("Date of Soln (yyyy-MM-dd): ");
+                return LocalDate.parse(sc.nextLine());
+            } catch (Exception e) {
+                System.out.println("Invalid date. Use yyyy-MM-dd.");
+            }
+        }
+    }
+    private boolean readFavorite(){
+        System.out.println("Mark as favorite?");
+        System.out.println("Yes? No?");
+        String fav = sc.nextLine();
+        return fav.trim().substring(0, 2).equalsIgnoreCase("yes") || fav.trim().substring(0, 0).equals("y");
+    }
+    private boolean readRevision(){
+        System.out.println("Mark as needs Revision?");
+        System.out.println("Yes? No?");
+        String rev = sc.nextLine();
+        return rev.trim().substring(0, 2).equalsIgnoreCase("yes") || rev.trim().substring(0, 0).equals("y");
+    }
 }

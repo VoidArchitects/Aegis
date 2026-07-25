@@ -1,7 +1,7 @@
 package enums;
 
 public class Topic {
-    enum Topics{
+    public enum Topics{
         Array,
         TwoPointer,
         Hashmap,

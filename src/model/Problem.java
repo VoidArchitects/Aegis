@@ -1,7 +1,6 @@
 package model;
-
 import enums.Difficulty;
-import enums.Topic;
+import enums.Topic.Topics;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -11,7 +10,7 @@ public class Problem implements Serializable {
     private String problemName;
     private int leetcodeNo;
     private Difficulty difficulty;
-    private List<Topic> topics;
+    private List<Topics> topics;
     private LocalDate dateSolved;
     private String notes;
     private int timeTakenInMinutes;
@@ -19,7 +18,7 @@ public class Problem implements Serializable {
     private boolean needsRevision;
 
     // =================================CONSTRUCTORS============================
-    public Problem(String problemName, int leetcodeNo, Difficulty difficulty, List<Topic> topics, 
+    public Problem(String problemName, int leetcodeNo, Difficulty difficulty, List<Topics> topics, 
                       LocalDate dateSolved, String notes, int timeTakenInMinutes, 
                       boolean favorite, boolean needsRevision) {
         this.problemName = problemName;
@@ -32,89 +31,68 @@ public class Problem implements Serializable {
         this.favorite = favorite;
         this.needsRevision = needsRevision;
     }
-
     // =================================GETTERS=================================
     public String getProblemName() {
         return problemName;
     }
-
     public int getLeetcodeNo() {
         return leetcodeNo;
     }
-
     public Difficulty getDifficulty() {
         return difficulty;
     }
-
-    public List<Topic> getTopics() {
+    public List<Topics> getTopics() {
         return List.copyOf(topics);
     }
-
     public LocalDate getDateSolved() {
         return dateSolved;
     }
-
     public String getNotes() {
         return notes;
     }
-
     public int getTimeTakenInMinutes() {
         return timeTakenInMinutes;
     }
-
     public boolean isFavorite() {
         return favorite;
     }
-
     public boolean needsRevision() {
         return needsRevision;
     }
-
     //==================================SETTERS=================================
     public void setProblemName(String problemName) {
         this.problemName = problemName;
     }
-
     public void setLeetcodeNo(int leetcodeNo) {
         this.leetcodeNo = leetcodeNo;
     }
-
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
     }
-
-    public void setTopics(List<Topic> topics) {
+    public void setTopics(List<Topics> topics) {
         this.topics = List.copyOf(topics);
     }
-
     public void setDateSolved(LocalDate dateSolved) {
         this.dateSolved = dateSolved;
     }
-
     public void setNotes(String notes) {
         this.notes = notes;
     }
-
     public void setTimeTakenInMinutes(int timeTakenInMinutes) {
         this.timeTakenInMinutes = timeTakenInMinutes;
     }
-
     public void markFavorite(){
         this.favorite = true;
     }
-
     public void unmarkFavorite(){
         this.favorite = false;
     }
-
     public void markForRevision(){
         this.needsRevision = true;
     }
-
     public void unmarkForRevision(){
         this.needsRevision = false;
     }
-
     // ========================================TO STRING===============================
     @Override
     public String toString(){
