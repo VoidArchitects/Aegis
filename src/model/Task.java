@@ -1,11 +1,13 @@
 package model;
-
+// =============================================IMPORTS=================================
 import enums.Category;
 import enums.Priority;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+// ==============================================CLASS==================================
 public class Task implements Serializable{
+    // =============================================FIELDS==================================
     private String title;
     private String description;
     private Category category;
@@ -14,6 +16,7 @@ public class Task implements Serializable{
     private boolean completed;
     private static final long serialVersionUID = 1L;
 
+    // ===========================================CONSTRUCTORS==============================
     public Task(String title, String description, Category category, Priority priority, LocalDate deadline) {
         this.title = title;
         this.description = description;
@@ -23,8 +26,7 @@ public class Task implements Serializable{
         this.completed = false;
     }
 
-// =================================GETTERS=================================
-
+    // =============================================GETTERS=================================
     public String getTitle() {
         return title;
     }
@@ -49,7 +51,7 @@ public class Task implements Serializable{
         return completed;
     }
 
-    // ================================SETTERS=================================
+    // =============================================SETTERS=================================
     public void setTitle(String title) {
         this.title = title;
     }
@@ -77,7 +79,7 @@ public class Task implements Serializable{
         this.completed = false;
     }
 
-    // ================================TO STRING=================================
+    // =============================================METHODS=================================
     @Override
     public String toString(){
         return """

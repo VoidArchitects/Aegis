@@ -1,22 +1,25 @@
 package service;
+// =============================================IMPORTS=================================
 import enums.Difficulty;
 import enums.Topic;
 import java.util.ArrayList;
 import java.util.List;
 import model.Problem;
 import storage.FileManager;
+
+// ==============================================CLASS==================================
 public class DSAService {
+    // =============================================FIELDS==================================
     private final List<Problem> problems; 
     private final FileManager fileManager;
+
+    // ===========================================CONSTRUCTORS==============================
     public DSAService() {
         this.fileManager = new FileManager();
         this.problems = new ArrayList<>(fileManager.loadQns());
-    
     }
-    private void save(){
-        fileManager.saveQn(problems);
-    }
-    // ===================================TASK MANAGEMENT METHODS=======================================
+
+    // =========================================CORE METHODS================================
     public void addProblem(Problem problem){
         problems.add(problem);
         save();
@@ -41,7 +44,8 @@ public class DSAService {
         problems.get(index -1).unmarkForRevision();
         save();
     }
-    // ========================================QUERIES METHODS===========================================
+
+    // ========================================QUERIES METHODS==============================
     public List<Problem> getAllProblems(){   
         return List.copyOf(problems);
     }
@@ -51,7 +55,8 @@ public class DSAService {
     public boolean hasProblems(){
         return !problems.isEmpty();
     }
-    // =========================================SEARCH METHODS=============================================
+
+    // =========================================SEARCH METHODS==============================
     public List<Problem> findByDifficulty(Difficulty difficulty){
         List<Problem> result = new ArrayList<>();
         for(Problem problem : problems){
@@ -61,7 +66,7 @@ public class DSAService {
         }
         return result;
     }
-    public List<Problem> findByTopic(Topic topic){
+    public List<Problem> findByTopic(Topic.Topics topic){
         List<Problem> result = new ArrayList<>();
         for(Problem problem : problems){
             if(problem.getTopics().contains(topic)){
@@ -87,5 +92,10 @@ public class DSAService {
             }
         }
         return result;
+    }
+
+    // ========================================HELPER METHODS===============================
+    private void save(){
+        fileManager.saveQn(problems);
     }
 }

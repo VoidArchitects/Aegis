@@ -1,4 +1,5 @@
 package storage;
+// =============================================IMPORTS=================================
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,15 +12,18 @@ import java.util.List;
 import model.Problem;
 import model.Task;
 
+// ==============================================CLASS==================================
 public class FileManager {
+    // =============================================FIELDS==================================
     private static final String TASK_FILE = "src/data/tasks.dat";
     private static final String DSA_FILE = "src/data/problems.dat";
 
+    // =============================================METHODS=================================
     public void saveTasks(List<Task> tasks){
         try {
            try (ObjectOutputStream out =
             new ObjectOutputStream(new FileOutputStream(TASK_FILE))) {
-                out.writeObject(tasks);
+                 out.writeObject(tasks);
             }      
         } catch (IOException e) {
             System.out.println("Error saving tasks: " + e.getMessage());
@@ -35,7 +39,7 @@ public class FileManager {
         try {
             try (ObjectInputStream in =
             new ObjectInputStream(new FileInputStream(TASK_FILE))) {
-                return (List<Task>) in.readObject();
+                 return (List<Task>) in.readObject();
             }
         } catch (EOFException e) {
             return new ArrayList<>();
@@ -48,7 +52,7 @@ public class FileManager {
         try {
            try (ObjectOutputStream out =
             new ObjectOutputStream(new FileOutputStream(DSA_FILE))) {
-                out.writeObject(problems);
+                 out.writeObject(problems);
             }      
         } catch (IOException e) {
             System.out.println("Error loading questions: " + e.getMessage());
@@ -64,7 +68,7 @@ public class FileManager {
         try {
             try (ObjectInputStream in =
             new ObjectInputStream(new FileInputStream(DSA_FILE))) {
-                return (List<Problem>) in.readObject();
+                 return (List<Problem>) in.readObject();
             }
         } catch (EOFException e) {
             return new ArrayList<>();

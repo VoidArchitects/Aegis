@@ -3,6 +3,7 @@ package model;
 import java.time.LocalDate;
 // ==============================================CLASS===============================
 public class User{
+    // =============================================FIELDS==================================
     private String name;
     private int age;
     private String college;

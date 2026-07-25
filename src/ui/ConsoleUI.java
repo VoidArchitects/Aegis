@@ -1,4 +1,5 @@
 package ui;
+// =============================================IMPORTS=================================
 import enums.Category;
 import enums.Difficulty;
 import enums.Priority;
@@ -13,12 +14,17 @@ import model.User;
 import service.DSAService;
 import service.TaskService;
 import service.UserService;
+
+// ==============================================CLASS==================================
 public class ConsoleUI{
+    // =============================================FIELDS==================================
     private final Scanner sc;
     private final User currentUser;
     private final UserService userService;
     private final TaskService taskService;
     private final DSAService dsaService;
+
+    // ===========================================CONSTRUCTORS==============================
     public ConsoleUI(UserService userService,
                  TaskService taskService,
                 DSAService dsaService){
@@ -28,6 +34,26 @@ public class ConsoleUI{
         this.dsaService = dsaService;
         this.currentUser  = this.userService.createDefaultUser();
     }
+
+    // ===========================================CORE METHODS==============================
+    public void start(){
+        boolean running = true;
+        while(running){
+            displayMenu();
+            int choice = readInt();
+            switch(choice){
+                case 1 -> displayUserProfile(currentUser);
+                case 2 -> displayTaskManager();
+                case 3 -> displayDSATracker();
+                case 4 -> displayGymTracker();
+                case 5 -> displayJapaneseTracker();
+                case 0 -> { displayExitMessage(); running = false; }
+                default -> System.out.println("Invalid choice. Please try again.");
+            }
+        }
+    }
+
+    // =========================================DISPLAY METHODS=============================
     public void displayMenu(){
         System.out.println( """
                 ===========================================
@@ -46,73 +72,12 @@ public class ConsoleUI{
                 Enter Your Choice: 
         """ );
     }
-    // ===============================START METHOD===============================
-    public void start(){
-        boolean running = true;
-        while(running){
-            displayMenu();
-            int choice = readInt();
-            switch(choice){
-                case 1 -> displayUserProfile(currentUser);
-                case 2 -> displayTaskManager();
-                case 3 -> displayDSATracker();
-                case 4 -> displayGymTracker();
-                case 5 -> displayJapaneseTracker();
-                case 0 -> { displayExitMessage(); running = false; }
-                default -> System.out.println("Invalid choice. Please try again.");
-            }
-        }
-    }
-    // ===============================DISPLAY METHODS===============================
     public void displayUserProfile(User user){
         System.out.println(user);
-    }
-    public void displayTaskManager(){
-        boolean running = true;
-        while(running){
-            displayTaskManagerMenu();
-            int choice = readInt();
-            switch(choice){
-                case 1 -> addTask();
-                case 2 -> removeTask();
-                case 3 -> markTaskAsCompleted();
-                case 4 -> markTaskAsIncomplete();
-                case 5 -> viewAllTasks();
-                case 6 -> editTask();
-                case 0 -> {displayTaskExitMsg(); running = false;}
-                default -> System.out.println("Invalid choice, please try again...");
-            }
-        }
-    }
-    public void displayDSATracker(){
-        boolean running = true;
-        while(running){
-            displayDSAMenu();
-            int choice = readInt();
-            switch(choice) {
-                case 1 -> addProblem();
-                case 2 -> removeProblem();
-                case 3 -> editProblem();
-                case 4 -> viewAllProblems();
-                case 5 -> markFavorite();
-                case 6 -> markRevision();
-                case 7 -> searchByDiff();
-                case 8 -> searchByTopic();
-                case 0 -> {displayDSAExitMsg(); running = false;}
-                default -> System.out.println("Invalid choice, please try again...");
-            }
-        }
-    }
-    public void displayGymTracker(){
-        System.out.println("Gym Tracker coming soon...");
-    }
-    public void displayJapaneseTracker(){
-        System.out.println("Japanese Tracker coming soon...");
     }
     public void displayExitMessage(){
         System.out.println("Thank you for using Project Aegis. Goodbye!");
     }
-    // =================================TASK MANAGER METHODS=================================
     public void displayTaskManagerMenu(){
         System.out.println( """
                 ===========================================
@@ -134,6 +99,60 @@ public class ConsoleUI{
 
                 Enter Your Choice: 
         """ );
+    }
+    public void displayTaskExitMsg(){
+        System.out.println("Exiting task menu...");
+    }
+    public void displayDSAMenu(){
+        System.out.println(
+            """
+                ===========================================
+                            DSA MANAGER
+                ===========================================
+
+                1. Add Problem
+                2. Remove Problem
+                3. Edit Problem
+                4. View All Problems
+                5. Mark Favorite
+                6. Mark Revision
+                7. Search problems by Difficulty
+                8. Search problems by Topic
+
+                0. Back to Main Menu
+                ===========================================
+
+                Enter Your Choice:                     
+            """
+        );
+    }
+    public void displayDSAExitMsg(){
+        System.out.println("Exiting DSA menu...");
+    }
+    public void displayGymTracker(){
+        System.out.println("Gym Tracker coming soon...");
+    }
+    public void displayJapaneseTracker(){
+        System.out.println("Japanese Tracker coming soon...");
+    }
+
+    // =======================================TASK MANAGER METHODS==========================
+    public void displayTaskManager(){
+        boolean running = true;
+        while(running){
+            displayTaskManagerMenu();
+            int choice = readInt();
+            switch(choice){
+                case 1 -> addTask();
+                case 2 -> removeTask();
+                case 3 -> markTaskAsCompleted();
+                case 4 -> markTaskAsIncomplete();
+                case 5 -> viewAllTasks();
+                case 6 -> editTask();
+                case 0 -> {displayTaskExitMsg(); running = false;}
+                default -> System.out.println("Invalid choice, please try again...");
+            }
+        }
     }
     public void addTask(){
         System.out.println(
@@ -274,93 +293,27 @@ public class ConsoleUI{
             System.out.println();
         }
     }
-    public void displayTaskExitMsg(){
-        System.out.println("Exiting task menu...");
-    }
-    private boolean ensureTasksExist() {
-        if (!taskService.hasTasks()) {
-            System.out.println("No tasks available.");
-            return false;
-        }
-        return true;
-    }
-    private boolean isValidTaskIndex(int index){
-        if (index < 1 || index > taskService.getTaskCount()) {
-            System.out.println("Invalid Index, please try again...");
-            return false;
-        }
-        return true;
-    }
-    private Category readCategory() {
-        while (true) {
-            System.out.println("Choose Category:");
-            for (int i = 0; i < Category.values().length; i++) {
-                System.out.println((i + 1) + ". " + Category.values()[i]);
-            }
+
+    // ==========================================DSA METHODS================================
+    public void displayDSATracker(){
+        boolean running = true;
+        while(running){
+            displayDSAMenu();
             int choice = readInt();
-            if (choice >= 1 && choice <= Category.values().length) {
-                return Category.values()[choice - 1];
-            }
-            System.out.println("Invalid category. Try again.");
-        }
-    }
-    private Priority readPriority() {
-        while (true) {
-            System.out.println("Choose Priority:");
-            for (int i = 0; i < Priority.values().length; i++) {
-                System.out.println((i + 1) + ". " + Priority.values()[i]);
-            }
-            int choice = readInt();
-            if (choice >= 1 && choice <= Priority.values().length) {
-                return Priority.values()[choice - 1];
-            }
-            System.out.println("Invalid priority. Try again.");
-        }
-    }
-    private LocalDate readDeadline() {
-        while (true) {
-            try {
-                System.out.print("Deadline (yyyy-MM-dd): ");
-                return LocalDate.parse(sc.nextLine());
-            } catch (Exception e) {
-                System.out.println("Invalid date. Use yyyy-MM-dd.");
+            switch(choice) {
+                case 1 -> addProblem();
+                case 2 -> removeProblem();
+                case 3 -> editProblem();
+                case 4 -> viewAllProblems();
+                case 5 -> markFavorite();
+                case 6 -> markRevision();
+                case 7 -> searchByDiff();
+                case 8 -> searchByTopic();
+                case 0 -> {displayDSAExitMsg(); running = false;}
+                default -> System.out.println("Invalid choice, please try again...");
             }
         }
     }
-    private int readInt() {
-        while (true) {
-            try {
-                return Integer.parseInt(sc.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("Please enter a valid number.");
-            }
-        }
-    }
-    // ========================================DSA Interface==================================
-    public void displayDSAMenu(){
-        System.out.println(
-            """
-                ===========================================
-                            DSA MANAGER
-                ===========================================
-
-                1. Add Problem
-                2. Remove Problem
-                3. Edit Problem
-                4. View All Problems
-                5. Mark Favorite
-                6. Mark Revision
-                7. Search problems by Difficulty
-                8. Search problems by Topic
-
-                0. Back to Main Menu
-                ===========================================
-
-                Enter Your Choice:                     
-            """
-        );
-    }
-    // =========================================DSA METHODS========================================
     public void addProblem(){
         System.out.println("Give Info about the problem you solved");
 
@@ -416,10 +369,53 @@ public class ConsoleUI{
     public void searchByTopic(){
 
     }
-    public void displayDSAExitMsg(){
 
+    // =======================================INPUT HELPER METHODS==========================
+    private Category readCategory() {
+        while (true) {
+            System.out.println("Choose Category:");
+            for (int i = 0; i < Category.values().length; i++) {
+                System.out.println((i + 1) + ". " + Category.values()[i]);
+            }
+            int choice = readInt();
+            if (choice >= 1 && choice <= Category.values().length) {
+                return Category.values()[choice - 1];
+            }
+            System.out.println("Invalid category. Try again.");
+        }
     }
-    // ==========================================DSA HELPERS====================================
+    private Priority readPriority() {
+        while (true) {
+            System.out.println("Choose Priority:");
+            for (int i = 0; i < Priority.values().length; i++) {
+                System.out.println((i + 1) + ". " + Priority.values()[i]);
+            }
+            int choice = readInt();
+            if (choice >= 1 && choice <= Priority.values().length) {
+                return Priority.values()[choice - 1];
+            }
+            System.out.println("Invalid priority. Try again.");
+        }
+    }
+    private LocalDate readDeadline() {
+        while (true) {
+            try {
+                System.out.print("Deadline (yyyy-MM-dd): ");
+                return LocalDate.parse(sc.nextLine());
+            } catch (Exception e) {
+                System.out.println("Invalid date. Use yyyy-MM-dd.");
+            }
+        }
+    }
+    private int readInt() {
+        while (true) {
+            try {
+                return Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+                System.out.println("Please enter a valid number.");
+            }
+        }
+    }
     private Difficulty readDifficulty() {
         while (true) {
             System.out.println("Choose Difficulty:");
@@ -474,5 +470,21 @@ public class ConsoleUI{
         System.out.println("Yes? No?");
         String rev = sc.nextLine();
         return rev.trim().substring(0, 2).equalsIgnoreCase("yes") || rev.trim().substring(0, 0).equals("y");
+    }
+
+    // =======================================VALIDATION HELPERS============================
+    private boolean ensureTasksExist() {
+        if (!taskService.hasTasks()) {
+            System.out.println("No tasks available.");
+            return false;
+        }
+        return true;
+    }
+    private boolean isValidTaskIndex(int index){
+        if (index < 1 || index > taskService.getTaskCount()) {
+            System.out.println("Invalid Index, please try again...");
+            return false;
+        }
+        return true;
     }
 }

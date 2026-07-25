@@ -1,11 +1,14 @@
 package model;
+// =============================================IMPORTS=================================
 import enums.Difficulty;
 import enums.Topic.Topics;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+// ==============================================CLASS==================================
 public class Problem implements Serializable {
+    // =============================================FIELDS==================================
     private static final long serialVersionUID = 1L;
     private String problemName;
     private int leetcodeNo;
@@ -17,7 +20,7 @@ public class Problem implements Serializable {
     private boolean favorite;
     private boolean needsRevision;
 
-    // =================================CONSTRUCTORS============================
+    // ===========================================CONSTRUCTORS==============================
     public Problem(String problemName, int leetcodeNo, Difficulty difficulty, List<Topics> topics, 
                       LocalDate dateSolved, String notes, int timeTakenInMinutes, 
                       boolean favorite, boolean needsRevision) {
@@ -31,7 +34,7 @@ public class Problem implements Serializable {
         this.favorite = favorite;
         this.needsRevision = needsRevision;
     }
-    // =================================GETTERS=================================
+    // =============================================GETTERS=================================
     public String getProblemName() {
         return problemName;
     }
@@ -59,7 +62,7 @@ public class Problem implements Serializable {
     public boolean needsRevision() {
         return needsRevision;
     }
-    //==================================SETTERS=================================
+    // =============================================SETTERS=================================
     public void setProblemName(String problemName) {
         this.problemName = problemName;
     }
@@ -93,7 +96,7 @@ public class Problem implements Serializable {
     public void unmarkForRevision(){
         this.needsRevision = false;
     }
-    // ========================================TO STRING===============================
+    // =============================================METHODS=================================
     @Override
     public String toString(){
         return """

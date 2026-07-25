@@ -1,4 +1,5 @@
 package service;
+// =============================================IMPORTS=================================
 import enums.Category;
 import enums.Priority;
 import java.time.LocalDate;
@@ -6,17 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Task;
 import storage.FileManager;
+
+// ==============================================CLASS==================================
 public class TaskService{
+    // =============================================FIELDS==================================
     private final List<Task> tasks;
     private final FileManager fileManager;
+
+    // ===========================================CONSTRUCTORS==============================
     public TaskService(){
         this.fileManager = new FileManager();
         this.tasks = new ArrayList<>(fileManager.loadTasks());
     }
-    private void save() {
-        fileManager.saveTasks(tasks);
-    }
-    // ================================TASK MANAGEMENT METHODS=================================
+
+    // =========================================CORE METHODS================================
     public void addTask(Task task){
         tasks.add(task);
         save();
@@ -33,7 +37,8 @@ public class TaskService{
         tasks.get(index - 1).markIncomplete();
         save();
     }
-    // ================================QUERIES=================================
+
+    // ===========================================QUERIES===================================
     public List<Task> getAllTasks(){
         return List.copyOf(tasks);
     }
@@ -43,7 +48,8 @@ public class TaskService{
     public boolean hasTasks() {
         return !tasks.isEmpty();
     }
-    // =================================SEARCH METHODS=================================
+
+    // =========================================SEARCH METHODS==============================
     public List<Task> findTasksByTitle(String title){
         List<Task> result = new ArrayList<>();
         for(Task task : tasks){
@@ -71,7 +77,8 @@ public class TaskService{
         }
         return result;
     }
-    // ================================SORTING METHODS=================================
+
+    // =========================================SORTING METHODS=============================
     public List<Task> sortTasksByTitle(){
         List<Task> sortedTasks = new ArrayList<>(tasks);
         sortedTasks.sort((a, b) -> a.getTitle().compareTo(b.getTitle()));
@@ -87,7 +94,8 @@ public class TaskService{
         sortedTasks.sort((a,b) -> a.getDeadline().compareTo(b.getDeadline()));
         return List.copyOf(sortedTasks);
     }
-    // ==================================EDIT METHODS====================================
+
+    // ==========================================EDIT METHODS===============================
     public void editTitle(int index, String newTitle){
         Task task = tasks.get(index - 1);
         task.setTitle(newTitle);
@@ -112,5 +120,10 @@ public class TaskService{
         Task task = tasks.get(index - 1);
         task.setDeadline(newDeadline);
         save();
+    }
+
+    // ========================================HELPER METHODS===============================
+    private void save() {
+        fileManager.saveTasks(tasks);
     }
 }
