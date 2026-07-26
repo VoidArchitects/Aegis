@@ -91,6 +91,19 @@ public class InputHandler {
             }
         }
     }
+    public Topics readTopic(){
+        while(true){
+            System.out.println("Choose Topic:");
+            for(int i = 0; i < Topics.values().length; i++){
+                System.out.println((i + 1) + ". " + Topics.values()[i]);
+            }
+            int choice = readInt();
+            if(choice >= 1 && choice <= Topics.values().length){
+                return Topics.values()[choice - 1];
+            }
+            System.out.println("Invalid topic. Try again.");
+        }
+    }
     public LocalDate readDate(){
         while (true) {
             try {
@@ -101,18 +114,15 @@ public class InputHandler {
             }
         }
     }
-    public boolean readFavorite(){
-        System.out.println("Mark as favorite?");
-        System.out.println("Yes? No?");
-        String fav = sc.nextLine();
-        return fav.trim().substring(0, 2).equalsIgnoreCase("yes") || fav.trim().substring(0, 0).equals("y");
-    }
-    public boolean readRevision(){
-        System.out.println("Mark as needs Revision?");
-        System.out.println("Yes? No?");
-        String rev = sc.nextLine();
-        return rev.trim().substring(0, 2).equalsIgnoreCase("yes") || rev.trim().substring(0, 0).equals("y");
-    }
+public boolean readFavorite(){
+    System.out.println("Mark as favorite? (yes/no)");
+    return sc.nextLine().trim().toLowerCase().startsWith("y");
+}
+
+public boolean readRevision(){
+    System.out.println("Needs revision? (yes/no)");
+    return sc.nextLine().trim().toLowerCase().startsWith("y");
+}
     public String readLine(){
         return sc.nextLine();
     }

@@ -33,64 +33,104 @@ public class DSAService {
         save();
     }
     public void markAsFavorite(int index){
+        if(!isValidIndex(index)) {
+            return;
+        }
         problems.get(index -1).markFavorite();
         save();
     }
     public void unmarkAsFavorite(int index){
+        if(!isValidIndex(index)) {
+            return;
+        }
         problems.get(index -1).unmarkFavorite();
         save();
     }
     public void markForRevision(int index){
+        if(!isValidIndex(index)) {
+            return;
+        }
         problems.get(index -1).markForRevision();
         save();
     }
     public void unmarkForRevision(int index){
+        if(!isValidIndex(index)) {
+            return;
+        }
         problems.get(index -1).unmarkForRevision();
         save();
     }
+
     //=========================================EDIT METHODS================================
     public void editProblemName(int index, String newName){
+        if(!isValidIndex(index)) {
+            return;
+        }
         Problem problem = getProblem(index);
         problem.setProblemName(newName);
         save();
     }
     public void editLeetcodeNo(int index, int newNo){
+        if(!isValidIndex(index)) {
+            return;
+        }
         Problem problem = getProblem(index);
         problem.setLeetcodeNo(newNo);
         save();
     }
     public void editDifficulty(int index, Difficulty newDifficulty){
+        if(!isValidIndex(index)) {
+            return;
+        }
         Problem problem = getProblem(index);
         problem.setDifficulty(newDifficulty);
         save();
     }
     public void editTopics(int index, List<Topics> newtopics){
+        if(!isValidIndex(index)) {
+            return;
+        }
         Problem problem = getProblem(index);
         problem.setTopics(newtopics);
         save();
     }
     public void editDateSolved(int index ,LocalDate newDate){
+        if(!isValidIndex(index)) {
+            return;
+        }
         Problem problem = getProblem(index);
         problem.setDateSolved(newDate);
         save();
     }
     public void editNotes(int index, String newNotes){
+        if(!isValidIndex(index)) {
+            return;
+        }
         Problem problem = getProblem(index);
         problem.setNotes(newNotes);
         save();
     }
     public void editTimeTaken(int index, int newTime){
+        if(!isValidIndex(index)) {
+            return;
+        }
         Problem problem = getProblem(index);
         problem.setTimeTakenInMinutes(newTime);
         save();
     }
     public void setFavoriteStatus(int index, boolean fav){
+        if(!isValidIndex(index)) {
+            return;
+        }
         Problem problem = getProblem(index);
         if(fav) problem.markFavorite();
         else problem.unmarkFavorite();
         save();
     }
     public void setRevisionStatus(int index, boolean rev){
+        if(!isValidIndex(index)) {
+            return;
+        }
         Problem problem = getProblem(index);
         if(rev) problem.markForRevision();
         else problem.unmarkForRevision();
@@ -105,6 +145,24 @@ public class DSAService {
     }
     public boolean hasProblems(){
         return !problems.isEmpty();
+    }
+    public void toggleFavorite(int index){
+        Problem problem = getProblem(index);
+        if(problem.isFavorite()){
+            problem.unmarkFavorite();
+        }
+        else{
+            problem.markFavorite();
+        }
+    }
+    public void toggleRevision(int index){
+        Problem problem = getProblem(index);
+        if(problem.needsRevision()){
+            problem.unmarkForRevision();
+        }
+        else{
+            problem.markForRevision();
+        }
     }
 
     // =========================================SEARCH METHODS==============================
