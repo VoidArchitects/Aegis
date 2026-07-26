@@ -3,7 +3,7 @@ package ui;
 import enums.Category;
 import enums.Difficulty;
 import enums.Priority;
-import enums.Topic.Topics;
+import enums.Topics;
 import java.time.LocalDate;
 import java.util.List;
 import model.Problem;

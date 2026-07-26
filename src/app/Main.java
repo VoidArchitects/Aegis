@@ -4,6 +4,7 @@ import service.DSAService;
 import service.TaskService;
 import service.UserService;
 import ui.ConsoleUI;
+import ui.InputHandler;
 
 // ==============================================CLASS==================================
 public class Main{
@@ -13,7 +14,8 @@ public class Main{
         UserService userService = new UserService();
         TaskService taskService = new TaskService();
         DSAService dsaService = new DSAService();
-        ConsoleUI ui = new ConsoleUI(userService, taskService, dsaService);
+        InputHandler inputHandler = new InputHandler();
+        ConsoleUI ui = new ConsoleUI(userService, taskService, dsaService, inputHandler);
         ui.start();
     }
 }

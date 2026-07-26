@@ -1,7 +1,7 @@
 package model;
 // =============================================IMPORTS=================================
 import enums.Difficulty;
-import enums.Topic.Topics;
+import enums.Topics;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;

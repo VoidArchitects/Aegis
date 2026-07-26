@@ -1,7 +1,6 @@
 package ui;
 
 import enums.*;
-import enums.Topic.Topics;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
