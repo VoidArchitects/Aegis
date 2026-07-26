@@ -26,14 +26,17 @@ public class TaskService{
         save();
     }
     public void removeTask(int index){
+        if(!isValidIndex(index)) return;
         tasks.remove(index - 1);
         save();
     }
     public void markTaskAsCompleted(int index){
+        if(!isValidIndex(index)) return;
         tasks.get(index - 1).markComplete();
         save();
     }
     public void markTaskAsNotCompleted(int index){
+        if(!isValidIndex(index)) return;
         tasks.get(index - 1).markIncomplete();
         save();
     }
@@ -97,26 +100,31 @@ public class TaskService{
 
     // ==========================================EDIT METHODS===============================
     public void editTitle(int index, String newTitle){
+        if(!isValidIndex(index)) return;
         Task task = tasks.get(index - 1);
         task.setTitle(newTitle);
         save();
     }
     public void editDescription(int index, String newDescription){
+        if(!isValidIndex(index)) return;
         Task task = tasks.get(index - 1);
         task.setDescription(newDescription);
         save();
     }
     public void editCategory(int index, Category newCategory){
+        if(!isValidIndex(index)) return;
         Task task = tasks.get(index - 1);
         task.setCategory(newCategory);
         save();
     }
     public void editPriority(int index, Priority newPriority){
+        if(!isValidIndex(index)) return;
         Task task = tasks.get(index - 1);
         task.setPriority(newPriority);
         save();
     }
     public void editDeadline(int index, LocalDate newDeadline){
+        if(!isValidIndex(index)) return;
         Task task = tasks.get(index - 1);
         task.setDeadline(newDeadline);
         save();
@@ -125,5 +133,8 @@ public class TaskService{
     // ========================================HELPER METHODS===============================
     private void save() {
         fileManager.saveTasks(tasks);
+    }
+    private boolean isValidIndex(int index) {
+        return index >= 1 && index <= tasks.size();
     }
 }

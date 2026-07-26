@@ -114,15 +114,15 @@ public class InputHandler {
             }
         }
     }
-public boolean readFavorite(){
-    System.out.println("Mark as favorite? (yes/no)");
-    return sc.nextLine().trim().toLowerCase().startsWith("y");
-}
+    public boolean readFavorite(){
+        System.out.println("Mark as favorite? (yes/no)");
+        return sc.nextLine().trim().toLowerCase().startsWith("y");
+    }
 
-public boolean readRevision(){
-    System.out.println("Needs revision? (yes/no)");
-    return sc.nextLine().trim().toLowerCase().startsWith("y");
-}
+    public boolean readRevision(){
+        System.out.println("Needs revision? (yes/no)");
+        return sc.nextLine().trim().toLowerCase().startsWith("y");
+    }
     public String readLine(){
         return sc.nextLine();
     }

@@ -55,7 +55,7 @@ public class FileManager {
                  out.writeObject(problems);
             }      
         } catch (IOException e) {
-            System.out.println("Error loading questions: " + e.getMessage());
+             System.out.println("Error saving questions: " + e.getMessage());
         }
     }
     @SuppressWarnings("unchecked")

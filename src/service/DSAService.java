@@ -154,6 +154,7 @@ public class DSAService {
         else{
             problem.markFavorite();
         }
+        save();
     }
     public void toggleRevision(int index){
         Problem problem = getProblem(index);
@@ -163,6 +164,7 @@ public class DSAService {
         else{
             problem.markForRevision();
         }
+        save();
     }
 
     // =========================================SEARCH METHODS==============================

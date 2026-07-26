@@ -3,8 +3,7 @@ package app;
 import service.DSAService;
 import service.TaskService;
 import service.UserService;
-import ui.ConsoleUI;
-import ui.InputHandler;
+import ui.*;
 
 // ==============================================CLASS==================================
 public class Main{
@@ -15,7 +14,9 @@ public class Main{
         TaskService taskService = new TaskService();
         DSAService dsaService = new DSAService();
         InputHandler inputHandler = new InputHandler();
-        ConsoleUI ui = new ConsoleUI(userService, taskService, dsaService, inputHandler);
+        DSAUI dsaUI = new DSAUI(dsaService, inputHandler);
+        TaskUI taskUI = new TaskUI(inputHandler, taskService);
+        ConsoleUI ui = new ConsoleUI(userService, dsaUI, taskUI, inputHandler);
         ui.start();
     }
 }
