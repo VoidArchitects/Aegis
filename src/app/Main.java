@@ -1,8 +1,6 @@
 package app;
 // =============================================IMPORTS=================================
-import service.DSAService;
-import service.TaskService;
-import service.UserService;
+import service.*;
 import ui.*;
 
 // ==============================================CLASS==================================
@@ -13,10 +11,12 @@ public class Main{
         UserService userService = new UserService();
         TaskService taskService = new TaskService();
         DSAService dsaService = new DSAService();
+        JapaneseService japaneseService = new JapaneseService();
         InputHandler inputHandler = new InputHandler();
+        JapaneseUI japaneseUI = new JapaneseUI(japaneseService, inputHandler);
         DSAUI dsaUI = new DSAUI(dsaService, inputHandler);
         TaskUI taskUI = new TaskUI(inputHandler, taskService);
-        ConsoleUI ui = new ConsoleUI(userService, dsaUI, taskUI, inputHandler);
+        ConsoleUI ui = new ConsoleUI(userService, dsaUI, taskUI,japaneseUI, inputHandler);
         ui.start();
     }
 }

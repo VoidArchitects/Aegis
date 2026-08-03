@@ -126,4 +126,57 @@ public class InputHandler {
     public String readLine(){
         return sc.nextLine();
     }
+    public boolean readBoolean(){
+        while(true){
+            String input = sc.nextLine().trim().toLowerCase();
+            switch(input){
+                case "yes", "y" -> { return true; }
+                case "no", "n" -> { return false; }
+                default -> System.out.println("Invalid input. Please enter 'yes' or 'no'.");
+            }
+        }
+    }
+        public JapaneseType readJapaneseType() {
+
+        while (true) {
+
+            System.out.println("""
+                    Select Japanese Type:
+                        1. Vocabulary
+                        2. Kanji
+                        3. Grammar
+                        4. Particle
+                        5. Form
+                    """);
+
+            System.out.print("Enter choice: ");
+
+            int choice = readInt();
+
+            switch (choice) {
+                case 1 -> {
+                    return JapaneseType.VOCAB;
+                }
+
+                case 2 -> {
+                    return JapaneseType.KANJI;
+                }
+
+                case 3 -> {
+                    return JapaneseType.GRAMMAR;
+                }
+
+                case 4 -> {
+                    return JapaneseType.PARTICLE;
+                }
+
+                case 5 -> {
+                    return JapaneseType.FORM;
+                }
+
+                default ->
+                    System.out.println("Invalid type. Please try again.");
+            }
+        }
+    }
 }

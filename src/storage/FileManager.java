@@ -9,6 +9,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import model.Japanese;
 import model.Problem;
 import model.Task;
 
@@ -17,7 +18,8 @@ public class FileManager {
     // =============================================FIELDS==================================
     private static final String TASK_FILE = "src/data/tasks.dat";
     private static final String DSA_FILE = "src/data/problems.dat";
-
+    private static final String JAPANESE_FILE = "src/data/japanese.dat";
+    
     // =============================================METHODS=================================
     public void saveTasks(List<Task> tasks){
         try {
@@ -74,6 +76,35 @@ public class FileManager {
             return new ArrayList<>();
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error loading questions: " + e.getMessage());
+        }
+        return new ArrayList<>();
+    }
+    public void saveItems(List<Japanese> items){
+        try {
+           try (ObjectOutputStream out =
+            new ObjectOutputStream(new FileOutputStream(JAPANESE_FILE))) {
+                 out.writeObject(items);
+            }      
+        } catch (IOException e) {
+             System.out.println("Error saving items: " + e.getMessage());
+        }
+    }
+    @SuppressWarnings("unchecked")
+    public List<Japanese> loadItems(){
+        File file = new File(JAPANESE_FILE);
+
+        if (!file.exists() || file.length() == 0) {
+            return new ArrayList<>();
+        }
+        try {
+            try (ObjectInputStream in =
+            new ObjectInputStream(new FileInputStream(JAPANESE_FILE))) {
+                 return (List<Japanese>) in.readObject();
+            }
+        } catch (EOFException e) {
+            return new ArrayList<>();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error loading items: " + e.getMessage());
         }
         return new ArrayList<>();
     }

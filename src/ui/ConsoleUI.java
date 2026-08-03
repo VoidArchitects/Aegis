@@ -8,16 +8,19 @@ public class ConsoleUI{
     private final UserService userService;
     private final TaskUI taskUI;
     private final DSAUI dsaUI;
+    private final JapaneseUI japaneseUI;
     private final InputHandler inputHandler;
 
     // ===========================================CONSTRUCTOR==============================
     public ConsoleUI(UserService userService,
                 DSAUI dsaUI,
             TaskUI taskUI,
+            JapaneseUI japaneseUI,
             InputHandler inputHandler){
         this.dsaUI = dsaUI;
         this.userService = userService;
         this.taskUI = taskUI;
+        this.japaneseUI = japaneseUI;
         this.inputHandler = inputHandler;
         this.currentUser  = this.userService.createDefaultUser();
     }
@@ -33,7 +36,7 @@ public class ConsoleUI{
                 case 2 -> taskUI.start();
                 case 3 -> dsaUI.start();
                 case 4 -> displayGymTracker();
-                case 5 -> displayJapaneseTracker();
+                case 5 -> japaneseUI.start();
                 case 0 -> { displayExitMessage(); running = false; }
                 default -> System.out.println("Invalid choice. Please try again.");
             }
