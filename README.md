@@ -1,415 +1,503 @@
-# Project Aegis
+# 🛡️ Project Aegis
 
-> A personal operating system for tracking productivity, skills, and self-improvement progress.
+> **A personal command-line operating system for managing productivity, learning, and self-improvement.**
 
-Project Aegis is a long-term software engineering project built from scratch in Java.
+Project Aegis is a Java-based CLI application I'm building from scratch as a long-term software engineering learning project.
 
-The goal is not just to create an application, but to learn real software engineering concepts by designing, building, debugging, and improving a real-world system.
-
-Instead of following tutorials, every feature is independently designed and implemented while focusing on:
-
-- Clean architecture
-- Object-oriented design
-- Data persistence
-- Maintainable code structure
-- Real software development workflow
+The goal isn't simply to build a productivity tracker. Aegis is my sandbox for learning how real software systems are designed, structured, persisted, refactored, and eventually evolved into a full-stack application.
 
 ---
 
-# Current Version
+## 🚀 Current Version
 
-**v0.4.0**
+**v0.5.0 — Japanese Tracker**
+
+Aegis currently contains three functional tracking modules:
+
+* ✅ Task Manager
+* ✅ DSA Tracker
+* ✅ Japanese Tracker
+* 🚧 Gym Tracker
+* 🚧 Dashboard & Analytics
 
 ---
 
-# Overview
+# 🎯 Project Goals
 
-Project Aegis is designed as a personal productivity and growth tracker containing multiple modules:
+Aegis is designed to track:
 
-```
-Project Aegis
+* 📋 Productivity & Tasks
+* 💻 DSA Progress
+* 🏋️ Gym Progress
+* 🇯🇵 Japanese Learning
+* 📊 Personal Statistics
 
-├── User Profile
-├── Task Manager
-├── DSA Tracker
-├── Gym Tracker
-├── Japanese Tracker
-└── Future Analytics Dashboard
-```
+More importantly, the project is helping me develop practical software engineering skills:
 
-Each module follows a layered architecture:
+* Object-Oriented Programming
+* Layered Architecture
+* Separation of Concerns
+* Clean Code
+* CRUD Operations
+* Data Persistence
+* Dependency Injection
+* Refactoring
+* Git & Version Control
+* Backend Architecture
 
-```
-User Interface
-      |
-      ↓
+---
+
+# 🏗️ Architecture
+
+Aegis currently follows a layered architecture:
+
+```text
+UI Layer
+    ↓
 Service Layer
-      |
-      ↓
-Model Layer
-      |
-      ↓
-Storage Layer
+    ↓
+Persistence Layer
+    ↓
+Serialized Data
 ```
 
----
+### Project Structure
 
-# Features
-
-# ✅ User Profile
-
-Current features:
-
-- Default user creation
-- Display user information
-- Encapsulation
-- Input validation
-- Custom formatted output
-
----
-
-# ✅ Task Manager
-
-A complete productivity tracking module.
-
-## Create
-
-- Add tasks
-
-## Read
-
-- View all tasks
-
-## Update
-
-- Edit task title
-- Edit description
-- Edit category
-- Edit priority
-- Edit deadline
-- Edit completion status
-
-## Delete
-
-- Remove tasks
-
-## Additional Features
-
-- Mark complete/incomplete
-- Search by title
-- Search by category
-- Search by priority
-- Sort by title
-- Sort by priority
-- Sort by deadline
-- Input validation
-- Index validation
-
----
-
-# ✅ Persistent Storage
-
-Project Aegis uses Java Object Serialization for local data persistence.
-
-Implemented:
-
-- Automatic saving
-- Automatic loading
-- Binary file storage
-- Persistent objects using `.dat` files
-
-Current storage:
-
-```
-src/data/
-
-├── tasks.dat
-└── problems.dat
-```
-
-Technology:
-
-- ObjectOutputStream
-- ObjectInputStream
-- FileInputStream
-- FileOutputStream
-
----
-
-# ✅ DSA Tracker
-
-A LeetCode-based problem tracking system.
-
-Current features:
-
-## Problem Management
-
-- Add solved problems
-- Remove problems
-- Edit problem information
-- View all problems
-
-## Problem Information
-
-Tracks:
-
-- Problem name
-- LeetCode number
-- Difficulty
-- Topics
-- Date solved
-- Notes
-- Time taken
-- Favorite status
-- Revision status
-
-## Search
-
-- Search by difficulty
-- Search by topic
-
-## Statistics
-
-- Count Easy problems
-- Count Medium problems
-- Count Hard problems
-
----
-
-# 🚧 Gym Tracker
-
-Planned module for tracking:
-
-- Workout sessions
-- Exercises
-- Personal records
-- Progressive overload
-- Training history
-
----
-
-# 🚧 Japanese Tracker
-
-Planned module for tracking:
-
-- Vocabulary
-- Kanji
-- Grammar progress
-- Lessons
-- Exam preparation
-
----
-
-# 🚧 Analytics Dashboard
-
-Future module for:
-
-- Productivity statistics
-- DSA progress graphs
-- Fitness progress
-- Learning analytics
-- Personal growth insights
-
----
-
-# Architecture
-
-Current structure:
-
-```
+```text
 src/
-
 ├── app/
 │   └── Main.java
+│
+├── enums/
+│   ├── Category.java
+│   ├── Difficulty.java
+│   ├── JapaneseType.java
+│   ├── Priority.java
+│   └── Topics.java
 │
 ├── model/
 │   ├── User.java
 │   ├── Task.java
-│   └── Problem.java
+│   ├── Problem.java
+│   └── Japanese.java
 │
 ├── service/
 │   ├── UserService.java
 │   ├── TaskService.java
-│   └── DSAService.java
+│   ├── DSAService.java
+│   └── JapaneseService.java
 │
 ├── storage/
 │   └── FileManager.java
 │
-├── enums/
-│   ├── Category.java
-│   ├── Priority.java
-│   ├── Difficulty.java
-│   └── Topic.java
-│
 └── ui/
     ├── ConsoleUI.java
     ├── InputHandler.java
-    └── MenuRenderer.java
+    ├── MenuRenderer.java
+    ├── TaskUI.java
+    ├── DSAUI.java
+    └── JapaneseUI.java
+```
+
+The architecture is intentionally evolving as the project grows. Future refactoring will further improve separation of responsibilities and scalability.
+
+---
+
+# 📋 Task Manager
+
+The Task Manager was the first major functional module in Aegis.
+
+### Features
+
+* Create tasks
+* Remove tasks
+* Edit tasks
+* Mark tasks as completed/incomplete
+* View all tasks
+* Search tasks
+* Filter tasks
+* Sort tasks
+* Assign categories
+* Assign priorities
+* Set deadlines
+* Persistent storage
+
+### Task Data
+
+Each task can contain:
+
+* Title
+* Description
+* Category
+* Priority
+* Deadline
+* Completion status
+
+---
+
+# 💻 DSA Tracker
+
+The DSA Tracker is designed to record and analyze my algorithm-solving progress.
+
+### Features
+
+* Add problems
+* Remove problems
+* Edit problems
+* View all problems
+* Search by difficulty
+* Search by topic
+* Favorite problems
+* Mark problems for revision
+* Toggle favorite status
+* Toggle revision status
+* Persistent storage
+* Basic statistics
+
+### Problem Data
+
+Each problem stores:
+
+* Problem name
+* LeetCode number
+* Difficulty
+* Topics
+* Date solved
+* Notes
+* Time taken
+* Favorite status
+* Revision status
+
+---
+
+# 🇯🇵 Japanese Tracker
+
+**Introduced in v0.5.0**
+
+The Japanese Tracker is the third major tracking module in Aegis.
+
+It is intentionally kept small for its first version so the architecture can be established before adding more advanced learning features.
+
+### Features
+
+* Add Japanese learning items
+* Edit Japanese items
+* Remove Japanese items
+* View all items
+* Search by type
+* Search by lesson
+* Search by mastered status
+* Search by revision status
+* Track mastered status
+* Track revision status
+* Store notes
+* Persistent storage
+
+### Japanese Item Data
+
+Each item can contain:
+
+* Name
+* Type
+* Lesson
+* Mastered status
+* Revision-needed status
+* Notes
+
+### Supported Types
+
+```text
+VOCAB
+KANJI
+GRAMMAR
+PARTICLE
+FORM
+```
+
+### Module Architecture
+
+```text
+JapaneseUI
+     ↓
+JapaneseService
+     ↓
+FileManager
+     ↓
+japanese.dat
 ```
 
 ---
 
-# Technologies
+# 💾 Persistence
 
-## Current
+Aegis currently uses Java's native object serialization for local persistence.
 
-- Java
-- Object-Oriented Programming
-- Java Collections Framework
-- Java Serialization
-- File Handling
-- Git & GitHub
+Data is stored as serialized `.dat` files.
 
-## Planned
+Current persistent modules include:
 
-- SQLite Database
-- JavaFX GUI
-- Spring Boot REST API
-- Web Dashboard
-- Analytics System
-
----
-
-# Development Roadmap
-
-## ✅ Phase 1: Foundation
-
-Completed:
-
-- Project setup
-- Model classes
-- Service classes
-- Console interface
-- User module
-- Task Manager
-
----
-
-## ✅ Phase 2: Persistence
-
-Completed:
-
-- File handling system
-- Object serialization
-- Automatic saving/loading
-- Persistent task storage
-
----
-
-## ✅ Phase 3: DSA Tracker
-
-Completed:
-
-- Problem model
-- DSA service layer
-- CRUD operations
-- Search functionality
-- Persistent DSA storage
-- Console interface
-
----
-
-## 🚧 Phase 4: Personal Tracking Modules
-
-Upcoming:
-
-- Gym Tracker
-- Japanese Tracker
-- Improved UI structure
-- Better validation
-- More statistics
-
----
-
-## 🚧 Phase 5: Application Upgrade
-
-Future:
-
-- Database migration
-- GUI application
-- Dashboard
-- Analytics
-- Reports
-- Cloud synchronization
-
----
-
-# Learning Goals
-
-Through Project Aegis, the goal is to master:
-
-## Programming
-
-- Object-Oriented Programming
-- Encapsulation
-- Abstraction
-- Interfaces
-- Collections Framework
-- Generics
-- Exception Handling
-
-## Software Engineering
-
-- Layered architecture
-- Separation of concerns
-- Clean code principles
-- Version control
-- Debugging workflow
-- Refactoring
-
-## Backend Concepts
-
-- File persistence
-- Serialization
-- Database concepts
-- API design
-
----
-
-# Current Progress
-
-```
-✅ User Profile
-
-✅ Task Manager
-
-✅ Persistent Storage
-
-✅ DSA Tracker
-
-⏳ Gym Tracker
-
-⏳ Japanese Tracker
-
-⏳ Dashboard
-
-⏳ Database Migration
-
-⏳ GUI Application
+```text
+tasks.dat
+problems.dat
+japanese.dat
 ```
 
----
+The persistence flow is approximately:
 
-# Git Development
-
-Project Aegis follows incremental development using Git commits.
-
-Example milestones:
-
-```
-feat(storage): add task persistence using Java serialization
-
-feat: implement persistent task storage and improved taskmanager
-
-feat(dsa): implement complete DSA tracker with persistence and CRUD operations
+```text
+Java Object
+     ↓
+ObjectOutputStream
+     ↓
+FileOutputStream
+     ↓
+.dat file
 ```
 
+And when loading:
+
+```text
+.dat file
+     ↓
+FileInputStream
+     ↓
+ObjectInputStream
+     ↓
+Java Object
+```
+
+This approach is intentionally simple while I'm learning persistence fundamentals.
+
+A future version will likely migrate to a more robust persistence solution such as:
+
+* JSON
+* SQLite
+* H2
+* PostgreSQL
+
 ---
 
-# Project Status
+# 🧩 UI Architecture
 
-🟢 Active Development
+The original `ConsoleUI` initially handled almost everything.
 
-Project Aegis is continuously evolving from a simple console application into a complete personal productivity and skill tracking system.
+As Aegis grew, this became difficult to maintain.
 
-Built feature-by-feature, learning engineering principles through actual implementation.
+The UI was therefore modularized into separate components:
+
+```text
+ConsoleUI
+├── TaskUI
+├── DSAUI
+├── JapaneseUI
+└── Future:
+    └── GymUI
+```
+
+`ConsoleUI` now focuses primarily on application-level navigation, while each module owns its own interaction flow.
+
+Shared input parsing is handled by:
+
+```text
+InputHandler
+```
+
+Static menu layouts are handled by:
+
+```text
+MenuRenderer
+```
+
+This keeps UI responsibilities separated as more modules are introduced.
+
+---
+
+# 🛠️ Tech Stack
+
+### Current
+
+* **Java**
+* Java Collections
+* Java OOP
+* Java Serialization
+* Java `LocalDate`
+* Git
+* GitHub
+
+### Planned
+
+* Spring Boot
+* REST APIs
+* PostgreSQL
+* React
+* Authentication
+* AI-assisted features
+
+The long-term goal is to evolve Aegis from a local CLI application into a full-stack personal system.
+
+---
+
+# 📈 Development Roadmap
+
+## v0.1 — Foundation
+
+* Project structure
+* User model
+* Initial CLI
+* Basic navigation
+
+## v0.2 — Task Manager
+
+* Task model
+* Task CRUD
+* Task service
+* Search & sorting
+
+## v0.3 — Persistence & Architecture
+
+* Java serialization
+* FileManager
+* Persistent task storage
+* Improved project structure
+
+## v0.4 — DSA Tracker
+
+* DSA model
+* DSA service
+* DSA CRUD
+* Search/filtering
+* Favorites
+* Revision tracking
+* Persistent DSA storage
+
+## v0.4.5 — UI Modularization
+
+* Split `ConsoleUI`
+* Introduce `TaskUI`
+* Introduce `DSAUI`
+* Improve UI separation
+* Add architecture documentation
+
+## v0.5 — Japanese Tracker
+
+* Japanese model
+* Japanese service
+* Japanese UI
+* CRUD
+* Search/filtering
+* Mastery tracking
+* Revision tracking
+* Persistent storage
+
+## Next — Gym Tracker
+
+The Gym Tracker will be developed more carefully because it introduces significantly more complex data relationships.
+
+Planned concepts include:
+
+* Workout sessions
+* Exercises
+* Sets
+* Repetitions
+* Weight tracking
+* Personal records
+* Progressive overload
+* Workout history
+* Analytics
+
+Before starting Gym Tracker, the existing architecture will undergo another refactoring pass to ensure the foundation is strong enough for the increased complexity.
+
+---
+
+# 🔮 Long-Term Vision
+
+The eventual goal is to evolve Aegis into a full-stack personal operating system.
+
+Potential architecture:
+
+```text
+                 React Frontend
+                       │
+                       ▼
+                Spring Boot API
+                       │
+              ┌────────┴────────┐
+              ▼                 ▼
+         PostgreSQL          AI Layer
+              │
+              ▼
+        Persistent Data
+```
+
+Potential future modules:
+
+* Task Management
+* DSA Progress
+* Gym Tracking
+* Japanese Learning
+* Habit Tracking
+* Personal Dashboard
+* Analytics
+* Authentication
+* Notifications
+* AI-powered insights
+
+---
+
+# 📚 Why I'm Building Aegis
+
+Aegis is intentionally being developed incrementally rather than copied from a tutorial.
+
+Each version is an opportunity to learn something new:
+
+```text
+OOP
+ ↓
+Architecture
+ ↓
+CRUD
+ ↓
+Persistence
+ ↓
+Refactoring
+ ↓
+Testing
+ ↓
+Backend Development
+ ↓
+Databases
+ ↓
+APIs
+ ↓
+Frontend
+ ↓
+Full-Stack System
+```
+
+The application itself is useful, but the real objective is learning how software evolves from a small idea into a maintainable system.
+
+---
+
+# 📌 Current Status
+
+**Version:** `v0.5.0`
+
+**Functional Modules:**
+
+* ✅ Task Manager
+* ✅ DSA Tracker
+* ✅ Japanese Tracker
+* 🚧 Gym Tracker
+* 🚧 Dashboard
+
+**Current focus:**
+
+> Strengthening the architecture before beginning the Gym Tracker.
+
+---
+
+## 🛡️ Project Aegis
+
+**Build it. Break it. Refactor it. Learn from it.**
+
+A long-term engineering project built one version at a time.
